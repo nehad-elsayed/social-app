@@ -30,7 +30,7 @@ export default function Profile() {
   
   {
     loading? <Loading/> : posts.map((post)=>{
-      return <PostDetails post={post} key={post._id} displayComments={true}/>
+      return <PostDetails post={post} key={post._id} displayComments={false}/>
     })
   }
   
