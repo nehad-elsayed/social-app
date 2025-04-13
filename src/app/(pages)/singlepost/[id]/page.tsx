@@ -2,7 +2,6 @@
 import PostDetails from "@/app/_components/postDetails/postDetails";
 import { getSinglePost } from "@/app/_redux/postsSlice";
 import { AppDispatch, State } from "@/app/_redux/store";
-import Loading from "@/app/loading";
 import { useParams } from "next/navigation";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,7 +15,7 @@ export default function SinglePost() {
 
   useEffect(() => {
     dispatch(getSinglePost(`${id}`));
-  }, []);
+  }, [dispatch,id]);
 
   return <>
   {loading ? <PostLoading /> : post && <PostDetails post={post} displayComments={true} />}

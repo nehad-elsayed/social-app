@@ -1,6 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import toast from "react-hot-toast";
-import Cookies from "js-cookie"
 
 type initialState = {
   token: null | string;

@@ -2,9 +2,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Checkbox from "@mui/material/Checkbox";
 import Divider from "@mui/material/Divider";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
 import Link from "@mui/material/Link";
@@ -63,7 +61,6 @@ const SignUpContainer = styled(Stack)(({ theme }) => ({
 }));
 
 export default function Register() {
-  const [errMsg, setErrMsg] = React.useState("");
   const navigate = useRouter();
   const initialValues: RegisterData = {
     name: "",
@@ -87,7 +84,6 @@ export default function Register() {
       })
       .catch((err) => {
         console.error(err.response.data.message);
-        setErrMsg(err.response.data.message);
       });
   }
 

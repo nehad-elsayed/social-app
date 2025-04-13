@@ -1,5 +1,4 @@
 "use client";
-import { Box, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Loading from "./loading";
@@ -21,7 +20,7 @@ export default function Home() {
       setIsLoading(false);
       dispatch(getPosts());
     }
-  }, []);
+  }, [dispatch,push]);
 
   return <>{isLoading || loading ? <Loading /> : posts.map((post)=>{ return <PostDetails key={post._id} post={post}/> })}</>;
 }

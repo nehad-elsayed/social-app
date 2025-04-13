@@ -1,4 +1,3 @@
-import { string } from "yup";
 import { Post } from "./../../interfaces/postsData";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
@@ -21,7 +20,7 @@ const initialState= {
   loading :false as boolean,
   posts: [] as Post[],
   post: null as Post|null,
-  error: null as any
+  error: null as string | null |any
 }
 
 //using fetch

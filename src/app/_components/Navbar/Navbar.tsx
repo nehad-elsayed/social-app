@@ -235,7 +235,7 @@ export default function Navbar() {
   // const [IsLoggedIn, setIsLoggedIn] = useState(false);
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const { isLoggedIn, token } = useSelector(
+  const { isLoggedIn } = useSelector(
     (state: State) => state.authReducer
   );
 

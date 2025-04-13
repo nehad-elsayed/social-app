@@ -6,8 +6,7 @@ import React, { FormEvent, useState } from "react";
 import toast from "react-hot-toast";
 
 export default function CreatePost() {
-  const [image, setImage] = useState(null);
-  const [body, setBody] = useState("");
+
   const { push } = useRouter();
 
   async function handleSubmit(e: FormEvent) {

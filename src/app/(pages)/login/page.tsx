@@ -5,7 +5,7 @@ import {
   setIsLoggedIn,
   setToken,
 } from "@/app/_redux/authSlice";
-import { State, store } from "@/app/_redux/store";
+import { State } from "@/app/_redux/store";
 import {
   Box,
   Button,
@@ -17,7 +17,7 @@ import {
 import axios from "axios";
 import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -27,7 +27,7 @@ export default function Login() {
   const navigate = useRouter();
   const dispatch = useDispatch();
 
-  const { isLoading, isLoggedIn } = useSelector(
+  const { isLoading} = useSelector(
     (store: State) => store.authReducer
   );
   //we use the hook (useDispatch to call any action creator inside it ) // important note
@@ -82,7 +82,7 @@ export default function Login() {
         toast.success("success");
         dispatch(setIsLoggedIn(true));
       }
-    } catch (error: any) {
+    } catch (error) {
       // console.error(
       //   "Login failed:",
       //   error?.response?.data?.message || error.message
@@ -92,7 +92,7 @@ export default function Login() {
     }
   }
 
-  let { values, handleSubmit, handleChange } = useFormik({
+const { values, handleSubmit, handleChange } = useFormik({
     initialValues: {
       email: "",
       password: "",

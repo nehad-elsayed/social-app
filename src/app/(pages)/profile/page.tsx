@@ -23,7 +23,7 @@ export default function Profile() {
 
   useEffect(() => {
     dispatch(getUserPosts(id));
-  }, []);
+  }, [dispatch, id]);
 
   return <>
   
