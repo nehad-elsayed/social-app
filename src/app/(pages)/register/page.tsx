@@ -72,7 +72,7 @@ export default function Register() {
   };
 
   function onSubmit() {
-    setErrMsg("");
+    // setErrMsg("");
     axios
       .post("https://linked-posts.routemisr.com/users/signup", values)
       .then(({ data }) => {
