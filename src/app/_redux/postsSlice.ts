@@ -16,12 +16,19 @@ import axios from "axios";
 //   error: null,
 // };
 
-const initialState= {
-  loading :false as boolean,
-  posts: [] as Post[],
-  post: null as Post|null,
-  error: null as string | null |any
-}
+type initialState = {
+  loading: boolean;
+  posts: Post[];
+  post: Post | null;
+  error: null | string;
+};
+
+const initialState: initialState = {
+  loading: false,
+  posts: [],
+  post: null,
+  error: null,
+};
 
 //using fetch
 // export const getPosts = createAsyncThunk("posts/getPosts", async () => {
@@ -39,45 +46,50 @@ const initialState= {
 // });
 
 export const getPosts = createAsyncThunk("posts/getPosts", async () => {
-  const {data} =await axios.get("https://linked-posts.routemisr.com/posts?page=97",
+  const { data } = await axios.get(
+    "https://linked-posts.routemisr.com/posts?page=97",
     {
-        headers:{
-            "token" :localStorage.getItem("token") || ""
-        }
+      headers: {
+        token: localStorage.getItem("token") || "",
+      },
     }
-    
-  )
-    return data.posts.reverse();
-  });
+  );
+  return data.posts.reverse();
+});
 // ====>>>> calling api to get single post
 
-export const getSinglePost = createAsyncThunk("posts/getSinglePost", async (postId:string) => {
-  const {data} =await axios.get(`https://linked-posts.routemisr.com/posts/${postId}`,
-    {
-        headers:{
-            "token" :localStorage.getItem("token") || ""
-        }
-    }
-    
-  )
-  console.log(data)
+export const getSinglePost = createAsyncThunk(
+  "posts/getSinglePost",
+  async (postId: string) => {
+    const { data } = await axios.get(
+      `https://linked-posts.routemisr.com/posts/${postId}`,
+      {
+        headers: {
+          token: localStorage.getItem("token") || "",
+        },
+      }
+    );
+    console.log(data);
     return data.post;
-  });
+  }
+);
 
 //get user posts
-  export const getUserPosts = createAsyncThunk("posts/getUserPosts", async (UserID:string) => {
-    const {data} =await axios.get(`https://linked-posts.routemisr.com/users/${UserID}/posts`,
+export const getUserPosts = createAsyncThunk(
+  "posts/getUserPosts",
+  async (UserID: string) => {
+    const { data } = await axios.get(
+      `https://linked-posts.routemisr.com/users/${UserID}/posts`,
       {
-          headers:{
-              "token" :localStorage.getItem("token") || ""
-          }
+        headers: {
+          token: localStorage.getItem("token") || "",
+        },
       }
-      
-    )
-    console.log(data)
-      return data.posts.reverse();
-    });
-
+    );
+    console.log(data);
+    return data.posts.reverse();
+  }
+);
 
 const postsSlice = createSlice({
   name: "posts",
@@ -117,5 +129,4 @@ const postsSlice = createSlice({
   },
 });
 
-
-export const postsReducer=postsSlice.reducer
+export const postsReducer = postsSlice.reducer;

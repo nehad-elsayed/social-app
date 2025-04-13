@@ -2,7 +2,7 @@
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent } from "react";
 import toast from "react-hot-toast";
 
 export default function CreatePost() {
