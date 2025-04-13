@@ -20,14 +20,12 @@ type initialState = {
   loading: boolean;
   posts: Post[];
   post: Post | null;
-  error: null | string;
 };
 
 const initialState: initialState = {
   loading: false,
   posts: [],
   post: null,
-  error: null,
 };
 
 //using fetch
@@ -103,9 +101,7 @@ const postsSlice = createSlice({
       state.loading = false;
       state.posts = action.payload;
     });
-    builder.addCase(getPosts.rejected, (state, action) => {
-      state.error = action.payload;
-    });
+  
     builder.addCase(getSinglePost.pending, (state) => {
       state.loading = true;
     });
@@ -113,9 +109,7 @@ const postsSlice = createSlice({
       state.loading = false;
       state.post = action.payload;
     });
-    builder.addCase(getSinglePost.rejected, (state, action) => {
-      state.error = action.payload;
-    });
+
     builder.addCase(getUserPosts.pending, (state) => {
       state.loading = true;
     });
@@ -123,9 +117,7 @@ const postsSlice = createSlice({
       state.loading = false;
       state.posts = action.payload;
     });
-    builder.addCase(getUserPosts.rejected, (state, action) => {
-      state.error = action.payload;
-    });
+ 
   },
 });
 
