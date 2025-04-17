@@ -31,13 +31,13 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   }),
   variants: [
     {
-      props: ({ expand }) => !expand,
+      props: ({ expand }: { expand: boolean }) => !expand,
       style: {
         transform: "rotate(0deg)",
       },
     },
     {
-      props: ({ expand }) => !!expand,
+      props: ({ expand }: { expand: boolean }) => !!expand,
       style: {
         transform: "rotate(180deg)",
       },
@@ -104,7 +104,6 @@ export default function PostDetails({
     console.log(data);
     setComments(data.comments);
   }
- 
 
   return (
     <Card sx={{ mx: "auto", my: 3, width: { md: "50%" } }} elevation={3}>
@@ -142,7 +141,7 @@ export default function PostDetails({
           width={400}
           height={300}
           priority
-          style={{  marginInline:"25%",objectFit:"cover" }}
+          style={{ marginInline: "25%", objectFit: "cover" }}
         />
       )}
 
