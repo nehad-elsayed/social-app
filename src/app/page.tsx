@@ -13,7 +13,9 @@ export default function Home() {
   const dispatch = useDispatch<AppDispatch>();
   //to protect home route should check frist if we have token or not
   const { push } = useRouter();
+
   useEffect(() => {
+    
     if (!localStorage.getItem("token")) {
       push("/login");
     } else {

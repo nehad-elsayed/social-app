@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
+
 type initialState = {
   token: null | string;
   isLoading: boolean;
@@ -8,10 +10,10 @@ type initialState = {
 };
 
 const initialState: initialState = {
-  token: localStorage.getItem("token"),
+  token: typeof window !== 'undefined' ? localStorage.getItem("token") : null,
   isLoading: false,
   error: null,
-  isLoggedIn: !!localStorage.getItem("token")
+  isLoggedIn: typeof window !== 'undefined' && !!localStorage.getItem("token")
 };
 
 //another solutaion to select initial state type
