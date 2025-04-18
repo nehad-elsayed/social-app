@@ -1,203 +1,4 @@
-// "use client";
 
-// import * as React from "react";
-// import AppBar from "@mui/material/AppBar";
-// import Box from "@mui/material/Box";
-// import Toolbar from "@mui/material/Toolbar";
-// import IconButton from "@mui/material/IconButton";
-// import Typography from "@mui/material/Typography";
-// import Menu from "@mui/material/Menu";
-// import MenuIcon from "@mui/icons-material/Menu";
-// import Container from "@mui/material/Container";
-// import Avatar from "@mui/material/Avatar";
-// import Button from "@mui/material/Button";
-// import Tooltip from "@mui/material/Tooltip";
-// import MenuItem from "@mui/material/MenuItem";
-// import Link from "next/link";
-// import SocialDistanceIcon from "@mui/icons-material/SocialDistance";
-// const settings = {
-//   isLoggedIn: ["Dashboard", "Profile", "Logout"],
-//   isNotLoggedIn: ["Login", "Register"],
-// };
-
-// export default function Navbar() {
-//   const [isLoggedIn, setIsLoggedIn] = React.useState(true);
-//   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-//     null
-//   );
-//   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-//     null
-//   );
-
-//   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-//     setAnchorElNav(event.currentTarget);
-//   };
-//   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-//     setAnchorElUser(event.currentTarget);
-//   };
-
-//   const handleCloseNavMenu = () => {
-//     setAnchorElNav(null);
-//   };
-
-//   const handleCloseUserMenu = () => {
-//     setAnchorElUser(null);
-//   };
-
-//   return (
-//     <AppBar position="static">
-//       <Container maxWidth="xl">
-//         <Toolbar disableGutters>
-//           <SocialDistanceIcon sx={{ marginInline: "5px" }} />
-
-//           <Typography
-//             variant="h6"
-//             noWrap
-//             sx={{
-//               mr: 2,
-//               display: { xs: "none", md: "flex" },
-//               fontFamily: "monospace",
-//               fontWeight: 700,
-//               letterSpacing: ".1rem",
-//               color: "inherit",
-//               textDecoration: "none",
-//             }}
-//           >
-//             <Link href={"/"}>Circle</Link>
-//           </Typography>
-
-//           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-//             <IconButton
-//               size="large"
-//               aria-label="account of current user"
-//               aria-controls="menu-appbar"
-//               aria-haspopup="true"
-//               onClick={handleOpenNavMenu}
-//               color="inherit"
-//             >
-//               <MenuIcon />
-//             </IconButton>
-//             <Menu
-//               id="menu-appbar"
-//               anchorEl={anchorElNav}
-//               anchorOrigin={{
-//                 vertical: "bottom",
-//                 horizontal: "left",
-//               }}
-//               keepMounted
-//               transformOrigin={{
-//                 vertical: "top",
-//                 horizontal: "left",
-//               }}
-//               open={Boolean(anchorElNav)}
-//               onClose={handleCloseNavMenu}
-//               sx={{ display: { xs: "block", md: "none" } }}
-//             >
-//               <MenuItem onClick={handleCloseNavMenu}>
-//                 <Typography sx={{ textAlign: "center" }}>
-//                   <Link href={"/profile"}> Profile</Link>
-//                 </Typography>
-//               </MenuItem>
-//               <MenuItem onClick={handleCloseNavMenu}>
-//                 <Typography sx={{ textAlign: "center" }}>
-//                   <Link href={"/createpost"}> Add Post</Link>
-//                 </Typography>
-//               </MenuItem>
-//             </Menu>
-//           </Box>
-
-//           <Typography
-//             variant="h5"
-//             noWrap
-//             sx={{
-//               mr: 2,
-//               display: { xs: "flex", md: "none" },
-//               flexGrow: 1,
-//               fontFamily: "monospace",
-//               fontWeight: 700,
-//               letterSpacing: ".1rem",
-//               color: "inherit",
-//               textDecoration: "none",
-//             }}
-//           >
-//             <Link href={"/"}>Circle</Link>
-//           </Typography>
-//           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-//             <Button
-//               onClick={handleCloseNavMenu}
-//               sx={{ my: 2, color: "white", display: "block" }}
-//             >
-//               <Link href={"/profile"}> Profile</Link>
-//             </Button>
-//             <Button
-//               onClick={handleCloseNavMenu}
-//               sx={{ my: 2, color: "white", display: "block" }}
-//             >
-//               <Link href={"/createpost"}> Add Post</Link>
-//             </Button>
-//           </Box>
-//           <Box sx={{ flexGrow: 0, display: { xs:"none", md: "flex"  } }}>
-//             <Button
-//               onClick={handleCloseNavMenu}
-//               sx={{ my: 2, color: "white", display: "block" }}
-//             >
-//               <Link href={"/login"}> Login</Link>
-//             </Button>
-//             <Button
-//               onClick={handleCloseNavMenu}
-//               sx={{ my: 2, color: "white", display: "block" }}
-//             >
-//               <Link href={"/register"}> Register</Link>
-//             </Button>
-//             <Button
-//               onClick={handleCloseNavMenu}
-//               sx={{ my: 2, color: "white", display: "block" }}
-//             >
-//               LogOut
-//             </Button>
-//           </Box>
-//           <Box sx={{ flexGrow: 0, display: { xs: "flex", md: "none" } }}>
-//             <Tooltip title="Open settings">
-//               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-//                 <Avatar alt="Remy Sharp" src="" />
-//               </IconButton>
-//             </Tooltip>
-//             <Menu
-//               sx={{ mt: "45px" }}
-//               id="menu-appbar"
-//               anchorEl={anchorElUser}
-//               anchorOrigin={{
-//                 vertical: "top",
-//                 horizontal: "right",
-//               }}
-//               keepMounted
-//               transformOrigin={{
-//                 vertical: "top",
-//                 horizontal: "right",
-//               }}
-//               open={Boolean(anchorElUser)}
-//               onClose={handleCloseUserMenu}
-//             >
-//               <MenuItem onClick={handleCloseUserMenu}>
-//                 <Typography sx={{ textAlign: "center" }}>
-//                   <Link href={"/login"}>Login</Link>
-//                 </Typography>
-//               </MenuItem>
-//               <MenuItem onClick={handleCloseUserMenu}>
-//                 <Typography sx={{ textAlign: "center" }}>
-//                   <Link href={"/register"}>Register</Link>
-//                 </Typography>
-//               </MenuItem>
-//               <MenuItem onClick={handleCloseUserMenu}>
-//                 <Typography sx={{ textAlign: "center" }}>LogOut </Typography>
-//               </MenuItem>
-//             </Menu>
-//           </Box>
-//         </Toolbar>
-//       </Container>
-//     </AppBar>
-//   );
-// }
 "use client";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -210,14 +11,14 @@ import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { State } from "@/app/_redux/store";
 import { Button } from "@mui/material";
 import { removeToken, setIsLoggedIn } from "@/app/_redux/authSlice";
 import { useRouter } from "next/navigation";
-
+import img from "../../../assets/images/icon-hamburger.svg"
 const pages = [
   { page: "AllPosts", href: "/" },
   { page: "Profile", href: "/profile" },
@@ -238,7 +39,11 @@ export default function Navbar() {
   const { isLoggedIn } = useSelector(
     (state: State) => state.authReducer
   );
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
+
+  
   const dispatch = useDispatch();
   const { push } = useRouter();
 
@@ -281,10 +86,10 @@ export default function Navbar() {
               textDecoration: "none",
             }}
           >
-            {isLoggedIn ? <Link href={"/"}> Circle</Link> : "Circle"}
+            {mounted && isLoggedIn  ? <Link href={"/"}> Circle</Link> : "Circle"}
           </Typography>
 
-          {isLoggedIn && (
+          {mounted && isLoggedIn && (
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
@@ -357,7 +162,7 @@ export default function Navbar() {
           <Box sx={{ flexGrow: 0, marginLeft: "auto" }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="" />
+                <Avatar alt="Remy Sharp" src={img} />
               </IconButton>
             </Tooltip>
             <Menu
