@@ -14,7 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { MouseEvent, useEffect, useState } from "react";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
-import { State } from "@/app/_redux/store";
+import { AppDispatch, State } from "@/app/_redux/store";
 import { Button } from "@mui/material";
 import { removeToken, setIsLoggedIn } from "@/app/_redux/authSlice";
 import { useRouter } from "next/navigation";
@@ -43,7 +43,7 @@ export default function Navbar() {
 useEffect(() => setMounted(true), []);
 if (!mounted) return null;
   
-  const dispatch = useDispatch();
+const dispatch = useDispatch<AppDispatch>();
   const { push } = useRouter();
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {

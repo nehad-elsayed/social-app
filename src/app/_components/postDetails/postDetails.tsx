@@ -24,6 +24,8 @@ interface ExpandMoreProps extends IconButtonProps {
 const ExpandMore = styled((props: ExpandMoreProps) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
+}, {
+  shouldForwardProp: (prop) => prop !== "expand",
 })<ExpandMoreProps>(({ theme, expand }) => ({
   marginLeft: "auto",
   transform: expand ? "rotate(180deg)" : "rotate(0deg)",
@@ -31,7 +33,6 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
     duration: theme.transitions.duration.shortest,
   }),
 }));
-
 // const ExpandMore = styled((props: ExpandMoreProps) => {
 //   const { expand,...other } = props;
 //   return <IconButton {...other} />;
@@ -117,6 +118,12 @@ export default function PostDetails({
     setComments(data.comments);
   }
 
+
+  React.useEffect(() => {
+    if (displayComments) {
+    
+    }
+  }, [displayComments]);
   return (
     <Card sx={{ mx: "auto", my: 3, width: { md: "50%" } }} elevation={3}>
       <CardHeader

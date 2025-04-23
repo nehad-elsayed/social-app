@@ -5,7 +5,7 @@ import {
   setIsLoggedIn,
   setToken,
 } from "@/app/_redux/authSlice";
-import { State } from "@/app/_redux/store";
+import { AppDispatch, State } from "@/app/_redux/store";
 import {
   Box,
   Button,
@@ -24,9 +24,8 @@ import { useDispatch, useSelector } from "react-redux";
 export default function Login() {
   // const [IsLoggedIn, setIsLoggedIn] = useState(false);
 
-  const navigate = useRouter();
-  const dispatch = useDispatch();
-
+  const {push} = useRouter();
+const dispatch = useDispatch<AppDispatch>();
   const { isLoading} = useSelector(
     (store: State) => store.authReducer
   );
@@ -76,7 +75,7 @@ export default function Login() {
       const data = response.data;
       console.log(data);
 
-      navigate.push("/")
+     push("/")
       if (response.data.message == "success") {
         dispatch(setToken(data.token));
         toast.success("success");

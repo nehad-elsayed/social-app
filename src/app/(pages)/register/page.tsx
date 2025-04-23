@@ -61,7 +61,7 @@ const SignUpContainer = styled(Stack)(({ theme }) => ({
 }));
 
 export default function Register() {
-  const navigate = useRouter();
+  const {push} = useRouter();
   const initialValues: RegisterData = {
     name: "",
     email: "",
@@ -78,7 +78,7 @@ export default function Register() {
       .then(({ data }) => {
         console.log(data.message);
         if (data.message == "success") {
-          navigate.push("/login");
+         push("/login");
         }
         console.log(data.message);
       })
