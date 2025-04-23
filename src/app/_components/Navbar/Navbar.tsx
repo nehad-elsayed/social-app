@@ -40,9 +40,8 @@ export default function Navbar() {
     (state: State) => state.authReducer
   );
   const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-
-
+useEffect(() => setMounted(true), []);
+if (!mounted) return null;
   
   const dispatch = useDispatch();
   const { push } = useRouter();
@@ -86,10 +85,15 @@ export default function Navbar() {
               textDecoration: "none",
             }}
           >
-            {mounted && isLoggedIn  ? <Link href={"/"}> Circle</Link> : "Circle"}
+            {/* { isLoggedIn  ? <Link href={"/"}> Circle</Link> : "Circle"} */}
+            {mounted
+    ? isLoggedIn
+      ? <Link href="/">Circle</Link>
+      : "Circle"
+    : "Circle"}
           </Typography>
 
-          {mounted && isLoggedIn && (
+          { isLoggedIn && (
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"

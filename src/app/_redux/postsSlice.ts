@@ -45,7 +45,7 @@ const initialState: initialState = {
 
 export const getPosts = createAsyncThunk("posts/getPosts", async () => {
   const { data } = await axios.get(
-    "https://linked-posts.routemisr.com/posts?page=97",
+    "https://linked-posts.routemisr.com/posts?page=100",
     {
       headers: {
         token: localStorage.getItem("token") || "",

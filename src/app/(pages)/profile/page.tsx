@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 import Loading from "@/app/loading";
 import PostDetails from "@/app/_components/postDetails/postDetails";
+import { Typography } from "@mui/material";
 
 interface MyJwtPayload {
   user: string; 
@@ -25,14 +26,19 @@ export default function Profile() {
     dispatch(getUserPosts(id));
   }, [dispatch, id]);
 
+
+if(loading){
+  return <Loading/>
+}
+
   return <>
   
-  
-  {
-    loading? <Loading/> : posts.map((post)=>{
+
+  { 
+    posts ?  posts.map((post)=>{
       return <PostDetails post={post} key={post._id} displayComments={false}/>
     })
-  }
+ : <> <Typography sx={{textAlign:"center",color:"blue",marginBlock:"1rem"}}>No Posts Yet</Typography> </> }
   
   
   </>;
