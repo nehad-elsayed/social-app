@@ -1,4 +1,3 @@
-
 "use client";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -18,7 +17,7 @@ import { AppDispatch, State } from "@/app/_redux/store";
 import { Button } from "@mui/material";
 import { removeToken, setIsLoggedIn } from "@/app/_redux/authSlice";
 import { useRouter } from "next/navigation";
-import img from "../../../assets/images/icon-hamburger.svg"
+import img from "../../../assets/images/icon-hamburger.svg";
 const pages = [
   { page: "AllPosts", href: "/" },
   { page: "Profile", href: "/profile" },
@@ -33,18 +32,15 @@ const settings = {
 };
 
 export default function Navbar() {
-  // const [IsLoggedIn, setIsLoggedIn] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const { push } = useRouter();
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const { isLoggedIn } = useSelector(
-    (state: State) => state.authReducer
-  );
+  const { isLoggedIn } = useSelector((state: State) => state.authReducer);
+
   const [mounted, setMounted] = useState(false);
-useEffect(() => setMounted(true), []);
-if (!mounted) return null;
-  
-const dispatch = useDispatch<AppDispatch>();
-  const { push } = useRouter();
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -74,7 +70,7 @@ const dispatch = useDispatch<AppDispatch>();
           <Typography
             variant="h6"
             noWrap
-           component="h6"
+            component="h6"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -86,14 +82,18 @@ const dispatch = useDispatch<AppDispatch>();
             }}
           >
             {/* { isLoggedIn  ? <Link href={"/"}> Circle</Link> : "Circle"} */}
-            {mounted
-    ? isLoggedIn
-      ? <Link href="/">Circle</Link>
-      : "Circle"
-    : "Circle"}
+            {mounted ? (
+              isLoggedIn ? (
+                <Link href="/">Circle</Link>
+              ) : (
+                "Circle"
+              )
+            ) : (
+              "Circle"
+            )}
           </Typography>
 
-          { isLoggedIn && (
+          {isLoggedIn && (
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"

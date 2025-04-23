@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
@@ -21,12 +20,14 @@ import { Box, Button, TextField } from "@mui/material";
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
 }
-const ExpandMore = styled((props: ExpandMoreProps) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-}, {
-  shouldForwardProp: (prop) => prop !== "expand",
-})<ExpandMoreProps>(({ theme, expand }) => ({
+const ExpandMore = styled(
+  (props: IconButtonProps) => {
+    return <IconButton {...props} />;
+  },
+  {
+    shouldForwardProp: (prop) => prop !== "expand",
+  }
+)<ExpandMoreProps>(({ theme, expand }) => ({
   marginLeft: "auto",
   transform: expand ? "rotate(180deg)" : "rotate(0deg)",
   transition: theme.transitions.create("transform", {
@@ -56,7 +57,6 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 //     },
 //   ],
 // }));
-
 
 export default function PostDetails({
   post,
@@ -118,10 +118,8 @@ export default function PostDetails({
     setComments(data.comments);
   }
 
-
   React.useEffect(() => {
     if (displayComments) {
-    
     }
   }, [displayComments]);
   return (
