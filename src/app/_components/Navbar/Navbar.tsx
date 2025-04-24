@@ -17,7 +17,10 @@ import { AppDispatch, State } from "@/app/_redux/store";
 import { Button } from "@mui/material";
 import { removeToken, setIsLoggedIn } from "@/app/_redux/authSlice";
 import { useRouter } from "next/navigation";
-import img from "../../../assets/images/icon-hamburger.svg";
+// import img from "../../../assets/images/icon-hamburger.svg";
+import MoodIcon from '@mui/icons-material/Mood';
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
+
 const pages = [
   { page: "AllPosts", href: "/" },
   { page: "Profile", href: "/profile" },
@@ -166,7 +169,8 @@ export default function Navbar() {
           <Box sx={{ flexGrow: 0, marginLeft: "auto" }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src={img} />
+                {/* <Avatar alt="Remy Sharp" src={img} />  */}
+              <MoodIcon/>
               </IconButton>
             </Tooltip>
             <Menu
@@ -198,7 +202,7 @@ export default function Navbar() {
                 ))}
               {isLoggedIn && (
                 <MenuItem onClick={handleCloseUserMenu}>
-                  <Button onClick={logout}>LogOut</Button>
+                  <Button onClick={logout}>LogOut <SentimentVeryDissatisfiedIcon/> </Button>
                 </MenuItem>
               )}
             </Menu>
