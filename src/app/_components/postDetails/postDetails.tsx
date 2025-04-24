@@ -156,9 +156,10 @@ export default function PostDetails({
           src={post.image}
           alt={`${post.body}`}
           width={400}
-          height={300}
+          height={400}
           priority
-          style={{ marginInline: "25%", objectFit: "cover" }}
+          style={{ objectFit: "cover" }}
+          className="post-img"
         />
       )}
 
