@@ -66,6 +66,7 @@ export default function PostDetails({
   displayComments?: boolean;
 }) {
   const [expanded, setExpanded] = React.useState(false);
+  const [commentValue, setCommentValue] = React.useState("");
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -116,6 +117,8 @@ export default function PostDetails({
     const data = await response.json();
     console.log(data);
     setComments(data.comments);
+    // Clear the comment field after successful submission
+    setCommentValue("");
   }
 
   React.useEffect(() => {
@@ -329,6 +332,8 @@ export default function PostDetails({
             label="comment"
             placeholder="Write Comment..."
             variant="outlined"
+            value={commentValue}
+            onChange={(e) => setCommentValue(e.target.value)}
           />
           <Button
             type="submit"

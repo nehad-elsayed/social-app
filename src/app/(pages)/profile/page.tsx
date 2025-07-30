@@ -53,7 +53,7 @@ import Loading from "@/app/loading";
 import PostDetails from "@/app/_components/postDetails/postDetails";
 import { Typography } from "@mui/material";
 
-interface MyJwtPayload {
+interface MyJwtPayload { //interface to decode the token // because we use type script
   user: string;
 }
 
