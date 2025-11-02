@@ -45,7 +45,7 @@ const initialState: initialState = {
 
 export const getPosts = createAsyncThunk("posts/getPosts", async () => {
   const { data } = await axios.get(
-    "https://linked-posts.routemisr.com/posts?page=100",
+    "https://linked-posts.routemisr.com/posts",
     {
       headers: {
         token: localStorage.getItem("token") || "",
@@ -101,7 +101,7 @@ const postsSlice = createSlice({
       state.loading = false;
       state.posts = action.payload;
     });
-  
+
     builder.addCase(getSinglePost.pending, (state) => {
       state.loading = true;
     });
@@ -117,7 +117,6 @@ const postsSlice = createSlice({
       state.loading = false;
       state.posts = action.payload;
     });
- 
   },
 });
 

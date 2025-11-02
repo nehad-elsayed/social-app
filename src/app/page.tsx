@@ -15,14 +15,23 @@ export default function Home() {
   const { push } = useRouter();
 
   useEffect(() => {
-    
     if (!localStorage.getItem("token")) {
       push("/login");
     } else {
       setIsLoading(false);
       dispatch(getPosts());
     }
-  }, [dispatch,push]);
+  }, [dispatch, push]);
 
-  return <>{isLoading || loading ? <Loading /> : posts.map((post)=>{ return <PostDetails key={post._id} post={post}/> })}</>;
+  return (
+    <>
+      {isLoading || loading ? (
+        <Loading />
+      ) : (
+        posts.map((post) => {
+          return <PostDetails key={post._id} post={post} />;
+        })
+      )}
+    </>
+  );
 }
