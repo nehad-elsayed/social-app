@@ -7,7 +7,6 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { MouseEvent, useEffect, useState } from "react";
@@ -18,8 +17,8 @@ import { Button } from "@mui/material";
 import { removeToken, setIsLoggedIn } from "@/app/_redux/authSlice";
 import { useRouter } from "next/navigation";
 // import img from "../../../assets/images/icon-hamburger.svg";
-import MoodIcon from '@mui/icons-material/Mood';
-import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
+import MoodIcon from "@mui/icons-material/Mood";
+import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 
 const pages = [
   { page: "AllPosts", href: "/" },
@@ -170,7 +169,7 @@ export default function Navbar() {
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 {/* <Avatar alt="Remy Sharp" src={img} />  */}
-              <MoodIcon/>
+                <MoodIcon />
               </IconButton>
             </Tooltip>
             <Menu
@@ -202,7 +201,9 @@ export default function Navbar() {
                 ))}
               {isLoggedIn && (
                 <MenuItem onClick={handleCloseUserMenu}>
-                  <Button onClick={logout}>LogOut <SentimentVeryDissatisfiedIcon/> </Button>
+                  <Button onClick={logout}>
+                    LogOut <SentimentVeryDissatisfiedIcon />{" "}
+                  </Button>
                 </MenuItem>
               )}
             </Menu>
