@@ -47,8 +47,11 @@ export default function CreatePost() {
       );
       toast.success(data.message);
       push("/profile");
-    } catch (error: any) {
-      toast.error(error?.response?.data?.message || "Failed to create post");
+    } catch (error) {
+      const errorMessage =
+        (error as { response?: { data?: { message?: string } } })?.response
+          ?.data?.message || "Failed to create post";
+      toast.error(errorMessage);
     }
   }
 
