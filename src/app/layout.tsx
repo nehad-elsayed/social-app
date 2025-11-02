@@ -1,5 +1,4 @@
-
-"use client"
+"use client";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
@@ -8,10 +7,9 @@ import theme from "@/theme";
 import { ReactNode } from "react";
 import Navbar from "./_components/Navbar/Navbar";
 import Footer from "./_components/Footer/Footer";
-import { Provider } from 'react-redux'
+import { Provider } from "react-redux";
 import { store } from "./_redux/store";
 import { Toaster } from "react-hot-toast";
-
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -32,24 +30,25 @@ import { Toaster } from "react-hot-toast";
 const roboto = Roboto({
   subsets: ["latin"],
   weight: ["400", "700"],
+  variable: "--font-roboto",
 });
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
-      <body style={{ fontFamily: roboto.style.fontFamily }}>
-     <Provider store={store}>
-     <AppRouterCacheProvider>
-          <ThemeProvider theme={theme}>
-          <Navbar />
-            <Box sx={{ marginTop: "2rem",minHeight:"100vh" }}>
-              {children}
-              <Toaster/>
-            </Box>
-            <Footer />
-          </ThemeProvider>
-        </AppRouterCacheProvider>
-     </Provider>
+    <html lang="en" className={roboto.variable}>
+      <body className={roboto.className} suppressHydrationWarning>
+        <Provider store={store}>
+          <AppRouterCacheProvider>
+            <ThemeProvider theme={theme}>
+              <Navbar />
+              <Box sx={{ marginTop: "2rem", minHeight: "100vh" }}>
+                {children}
+                <Toaster />
+              </Box>
+              <Footer />
+            </ThemeProvider>
+          </AppRouterCacheProvider>
+        </Provider>
       </body>
     </html>
   );

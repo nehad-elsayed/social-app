@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
@@ -68,6 +69,12 @@ export default function PostDetails({
   const [expanded, setExpanded] = React.useState(false);
   const [commentValue, setCommentValue] = React.useState("");
 
+  // Helper function to format date consistently
+  const formatDate = (dateString: string): string => {
+    if (!dateString) return "";
+    return dateString.split("T")[0];
+  };
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -103,13 +110,17 @@ export default function PostDetails({
       post: post._id,
     };
 
+    // Safely get token from localStorage (only on client-side)
+    const token =
+      typeof window !== "undefined" ? localStorage.getItem("token") : null;
+
     const response = await fetch(
       `https://linked-posts.routemisr.com/comments`,
       {
         method: "POST",
         body: JSON.stringify(values),
         headers: {
-          token: `${localStorage.getItem("token")}`,
+          token: token || "",
           "Content-Type": "Application/json",
         },
       }
@@ -145,7 +156,7 @@ export default function PostDetails({
           </IconButton>
         }
         title={post.user.name}
-        subheader={post.createdAt.split("T", 1)}
+        subheader={formatDate(post.createdAt)}
       />
       <CardContent>
         {post.body && (
@@ -223,7 +234,7 @@ export default function PostDetails({
                 </IconButton>
               }
               title={post.user.name}
-              subheader={post.createdAt.split("T", 1)}
+              subheader={formatDate(post.createdAt)}
             />
             <Typography sx={{ marginBottom: 2, width: "80%", mx: "auto" }}>
               {post.comments[0].content}
@@ -271,7 +282,7 @@ export default function PostDetails({
                     </IconButton>
                   }
                   title={comment.commentCreator.name}
-                  subheader={comment.createdAt.split("T", 1)}
+                  subheader={formatDate(comment.createdAt)}
                 />
                 <Typography sx={{ marginBottom: 2, width: "80%", mx: "auto" }}>
                   {comment.content}
@@ -309,7 +320,7 @@ export default function PostDetails({
                     </IconButton>
                   }
                   title={comment.commentCreator.name}
-                  subheader={comment.createdAt.split("T", 1)}
+                  subheader={formatDate(comment.createdAt)}
                 />
                 <Typography sx={{ marginBottom: 2, width: "80%", mx: "auto" }}>
                   {comment.content}
