@@ -18,7 +18,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { Comment, Post } from "@/interfaces/postsData";
 import Image from "next/image";
 import Link from "next/link";
-import { Box, Button, Modal, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import { jwtDecode } from "jwt-decode";
 import { deletePost } from "@/app/_redux/postsSlice";
 import { useDispatch } from "react-redux";

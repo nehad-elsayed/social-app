@@ -89,14 +89,11 @@ export const getUserPosts = createAsyncThunk(
 export const deletePost = createAsyncThunk(
   "posts/deletePost",
   async (postId: string) => {
-    const { data } = await axios.delete(
-      `https://linked-posts.routemisr.com/posts/${postId}`,
-      {
-        headers: {
-          token: localStorage.getItem("token") || "",
-        },
-      }
-    );
+    await axios.delete(`https://linked-posts.routemisr.com/posts/${postId}`, {
+      headers: {
+        token: localStorage.getItem("token") || "",
+      },
+    });
     // Return postId so it can be used in the fulfilled handler
     return postId;
   }
