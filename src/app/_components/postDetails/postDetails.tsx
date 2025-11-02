@@ -14,10 +14,22 @@ import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import CommentIcon from "@mui/icons-material/Comment";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { Comment, Post } from "@/interfaces/postsData";
 import Image from "next/image";
 import Link from "next/link";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, Modal, TextField } from "@mui/material";
+import { jwtDecode } from "jwt-decode";
+import { deletePost } from "@/app/_redux/postsSlice";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/app/_redux/store";
+import toast from "react-hot-toast";
+import ModalDeletePost from "../ModalDeletePost/ModalDeletePost";
+
+interface MyJwtPayload {
+  user: string;
+}
+
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
 }
@@ -35,29 +47,6 @@ const ExpandMore = styled(
     duration: theme.transitions.duration.shortest,
   }),
 }));
-// const ExpandMore = styled((props: ExpandMoreProps) => {
-//   const { expand,...other } = props;
-//   return <IconButton {...other} />;
-// })(({ theme }) => ({
-//   marginLeft: "auto",
-//   transition: theme.transitions.create("transform", {
-//     duration: theme.transitions.duration.shortest,
-//   }),
-//   variants: [
-//     {
-//       props: ({ expand }: { expand: boolean }) => !expand,
-//       style: {
-//         transform: "rotate(0deg)",
-//       },
-//     },
-//     {
-//       props: ({ expand }: { expand: boolean }) => !!expand,
-//       style: {
-//         transform: "rotate(180deg)",
-//       },
-//     },
-//   ],
-// }));
 
 export default function PostDetails({
   post,
@@ -68,6 +57,34 @@ export default function PostDetails({
 }) {
   const [expanded, setExpanded] = React.useState(false);
   const [commentValue, setCommentValue] = React.useState("");
+  const [currentUserId, setCurrentUserId] = React.useState<string | null>(null);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const handleDeletePost = async () => {
+    try {
+      await dispatch(deletePost(post._id)).unwrap();
+      toast.success("Post deleted successfully");
+      handleClose();
+    } catch (error) {
+      toast.error("Failed to delete post");
+      console.error("Error deleting post:", error);
+    }
+  };
+
+  React.useEffect(() => {
+    const token =
+      typeof window !== "undefined" ? localStorage.getItem("token") : null;
+    if (token) {
+      try {
+        const decoded = jwtDecode<MyJwtPayload>(token);
+        setCurrentUserId(decoded.user);
+      } catch (error) {
+        console.error("Error decoding token:", error);
+      }
+    }
+  }, []);
 
   // Helper function to format date consistently
   const formatDate = (dateString: string): string => {
@@ -75,29 +92,12 @@ export default function PostDetails({
     return dateString.split("T")[0];
   };
 
+  // Check if current user is the post owner
+  const isPostOwner = currentUserId === post.user._id;
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
-  // ===>>> Using Axios ===>>>
-
-  // async function handleSubmit(e:React.FormEvent){
-  //   e.preventDefault();
-  //   const form = e.target as HTMLFormElement
-  //   const values = {
-  //     content: form.comment.value,
-  //     post: post._id
-  //   }
-
-  // const {data} = await axios.post("https://linked-posts.routemisr.com/comments", values,{
-  //   headers:{
-  //     "token": `${localStorage.getItem("token")}`
-  //   }
-  // })
-
-  // console.log(data);
-  // setComments(data.comments)
-  // }
 
   //==========>>>Using Fetchhhh ===>
   const [comments, setComments] = React.useState([]);
@@ -151,13 +151,22 @@ export default function PostDetails({
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
+          isPostOwner && (
+            <IconButton aria-label="delete">
+              <DeleteIcon onClick={handleOpen} />
+            </IconButton>
+          )
         }
         title={post.user.name}
         subheader={formatDate(post.createdAt)}
       />
+      {open && (
+        <ModalDeletePost
+          handleDeletePost={handleDeletePost}
+          open={open}
+          handleClose={handleClose}
+        />
+      )}
       <CardContent>
         {post.body && (
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
@@ -227,11 +236,6 @@ export default function PostDetails({
                     post.comments[0].commentCreator.name.slice(0, 1)
                   )}{" "}
                 </Avatar>
-              }
-              action={
-                <IconButton aria-label="settings">
-                  <MoreVertIcon />
-                </IconButton>
               }
               title={post.user.name}
               subheader={formatDate(post.createdAt)}

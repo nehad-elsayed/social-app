@@ -44,14 +44,11 @@ const initialState: initialState = {
 // });
 
 export const getPosts = createAsyncThunk("posts/getPosts", async () => {
-  const { data } = await axios.get(
-    "https://linked-posts.routemisr.com/posts",
-    {
-      headers: {
-        token: localStorage.getItem("token") || "",
-      },
-    }
-  );
+  const { data } = await axios.get("https://linked-posts.routemisr.com/posts", {
+    headers: {
+      token: localStorage.getItem("token") || "",
+    },
+  });
   return data.posts.reverse();
 });
 // ====>>>> calling api to get single post
@@ -88,6 +85,22 @@ export const getUserPosts = createAsyncThunk(
     return data.posts.reverse();
   }
 );
+// https://linked-posts.routemisr.com/posts/66875b3b006c4ff191a61a89
+export const deletePost = createAsyncThunk(
+  "posts/deletePost",
+  async (postId: string) => {
+    const { data } = await axios.delete(
+      `https://linked-posts.routemisr.com/posts/${postId}`,
+      {
+        headers: {
+          token: localStorage.getItem("token") || "",
+        },
+      }
+    );
+    // Return postId so it can be used in the fulfilled handler
+    return postId;
+  }
+);
 
 const postsSlice = createSlice({
   name: "posts",
@@ -116,6 +129,18 @@ const postsSlice = createSlice({
     builder.addCase(getUserPosts.fulfilled, (state, action) => {
       state.loading = false;
       state.posts = action.payload;
+    });
+    builder.addCase(deletePost.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(deletePost.fulfilled, (state, action) => {
+      state.loading = false;
+      // Use action.meta.arg to get the postId that was passed to the thunk
+      const postId = action.meta.arg;
+      state.posts = state.posts.filter((post) => post._id !== postId);
+    });
+    builder.addCase(deletePost.rejected, (state) => {
+      state.loading = false;
     });
   },
 });
