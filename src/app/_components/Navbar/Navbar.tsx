@@ -66,9 +66,12 @@ export default function Navbar() {
   }
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
+    <AppBar position="static" sx={{ width: "100%", overflow: "hidden" }}>
+      <Container maxWidth="xl" sx={{ width: "100%" }}>
+        <Toolbar
+          disableGutters
+          sx={{ width: "100%", minHeight: "64px !important" }}
+        >
           <Typography
             variant="h6"
             noWrap
@@ -165,9 +168,25 @@ export default function Navbar() {
               ))}
             </Box>
           )}
-          <Box sx={{ flexGrow: 0, marginLeft: "auto" }}>
+          <Box
+            sx={{
+              flexGrow: 0,
+              marginLeft: "auto",
+              minWidth: "48px",
+              flexShrink: 0,
+            }}
+          >
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <IconButton
+                onClick={handleOpenUserMenu}
+                sx={{
+                  p: 0,
+                  minWidth: "48px",
+                  width: "48px",
+                  height: "48px",
+                  flexShrink: 0,
+                }}
+              >
                 {/* <Avatar alt="Remy Sharp" src={img} />  */}
                 <MoodIcon />
               </IconButton>

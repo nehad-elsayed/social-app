@@ -6,7 +6,6 @@ import React, { FormEvent } from "react";
 import toast from "react-hot-toast";
 
 export default function CreatePost() {
-
   const { push } = useRouter();
 
   async function handleSubmit(e: FormEvent) {
@@ -16,39 +15,42 @@ export default function CreatePost() {
     // عشان اسحب الفاليوز من الانبوتس باخد نسخه من الفورم داتا عن طريق نيوو وابدا اضيف عليها البادي والصوره
     const formData = new FormData();
 
+    // Get values
+    const bodyText = form.body.value.trim();
+    const imageFile = form.image.files?.[0];
 
-        // console.log( form.body.value)
-    // console.log( form.body.files[0])
+    // Validate: must have either text or image (or both)
+    if (!bodyText && !imageFile) {
+      toast.error("Please add text or image (or both)");
+      return;
+    }
 
+    // Add body only if it has text
+    if (bodyText) {
+      formData.append("body", bodyText);
+    }
 
-    
-    formData.append("body", form.body.value);
-    formData.append("image", form.image.files[0]);
+    // Add image only if a file is selected
+    if (imageFile) {
+      formData.append("image", imageFile);
+    }
 
-    //عشان ممكن نكتب بوست من غير صوره او نرفع صوره من غير بوست 
-    // if (image != null) {
-    //   formData.append("image", image);
-    // }
-    // if (body.trim() != "") {
-    //   formData.append("body", body);
-    // }
-
-
-
-    const { data } = await axios.post(
-      "https://linked-posts.routemisr.com/posts",
-      formData,
-      {
-        headers: {
-          token: localStorage.getItem("token") || "",
-        },
-      }
-    );
-    toast.success(data.message);
-    push("/profile")
+    try {
+      const { data } = await axios.post(
+        "https://linked-posts.routemisr.com/posts",
+        formData,
+        {
+          headers: {
+            token: localStorage.getItem("token") || "",
+          },
+        }
+      );
+      toast.success(data.message);
+      push("/profile");
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message || "Failed to create post");
+    }
   }
-
-
 
   return (
     <>
